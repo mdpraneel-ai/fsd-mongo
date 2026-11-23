@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailGo - Railway Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🚆 RailGo</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#booking">Book Ticket</a>
+        <a href="#automata">DFA Simulator</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="tagline">SMART RAILWAY BOOKING SYSTEM</p>
+        <h1>Your Journey,<br>Our Responsibility.</h1>
+        <p>Search trains, book tickets and experience
+           a smart railway booking system powered by
+           Finite Automata.</p>
+        <a href="#booking" class="main-btn">Book Your Journey</a>
+    </div>
+</section>
+
+<main class="container">
+
+    <section class="panel" id="booking">
+        <h2>🚆 Search Your Train</h2>
+
+        <div class="search-grid">
+            <div>
+                <label>From Station</label>
+                <select id="from">
+                    <option value="">Select Source</option>
+                    <option>Mysuru</option>
+                    <option>Bengaluru</option>
+                    <option>Chennai</option>
+                    <option>Hyderabad</option>
+                </select>
+            </div>
+
+            <div>
+                <label>To Station</label>
+                <select id="to">
+                    <option value="">Select Destination</option>
+                    <option>Mysuru</option>
+                    <option>Bengaluru</option>
+                    <option>Chennai</option>
+                    <option>Hyderabad</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Journey Date</label>
+                <input type="date" id="journeyDate">
+            </div>
+        </div>
+
+        <button class="main-btn" id="searchBtn">
+            Search Trains
+        </button>
+
+        <p id="searchMessage" class="message"></p>
+    </section>
+
+    <section class="panel hidden" id="trainSection">
+        <h2>Available Trains</h2>
+        <div id="trainList" class="train-grid"></div>
+    </section>
+
+    <section class="panel hidden" id="passengerSection">
+        <h2>👤 Passenger Details</h2>
+
+        <div class="form-grid">
+            <div>
+                <label>Passenger Name</label>
+                <input type="text" id="passengerName"
+                       placeholder="Enter full name">
+            </div>
+
+            <div>
+                <label>Age</label>
+                <input type="number" id="age"
+                       placeholder="Enter age" min="1" max="120">
+            </div>
+
+            <div>
+                <label>Gender</label>
+                <select id="gender">
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Seat Preference</label>
+                <select id="seat">
+                    <option>Window</option>
+                    <option>Aisle</option>
+                    <option>Any</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="main-btn" id="detailsBtn">
+            Continue to Payment
+        </button>
+        <p id="passengerMessage" class="message"></p>
+    </section>
+
+    <section class="panel hidden" id="paymentSection">
+        <h2>💳 Payment</h2>
+
+        <div class="payment-card">
+            <h3>Booking Summary</h3>
+            <p id="summary"></p>
+            <h2 id="totalFare"></h2>
+
+            <label>Payment Method</label>
+            <select id="paymentMethod">
+                <option value="UPI">UPI</option>
+                <option value="Card">Debit / Credit Card</option>
+                <option value="Net Banking">Net Banking</option>
+            </select>
+
+            <button class="main-btn" id="payBtn">
+                Pay Now
+            </button>
+            <p id="paymentMessage" class="message"></p>
+        </div>
+    </section>
+
+    <section class="panel hidden" id="ticketSection">
+        <div class="ticket">
+            <h2>🎫 Ticket Confirmed!</h2>
+            <p class="success">Booking Successful</p>
+            <div id="ticketDetails"></div>
+            <button class="main-btn" onclick="window.print()">
+                Print Ticket
+            </button>
+        </div>
+    </section>
+
+    <section class="panel" id="automata">
+        <h2>⚙ Finite Automata Simulator</h2>
+        <p class="description">
+            Observe how the railway booking process moves
+            from one DFA state to another.
+        </p>
+
+        <div class="dfa-flow" id="dfaFlow">
+            <div class="dfa-state active" data-state="q0">
+                <strong>q0</strong>
+                <small>Start</small>
+            </div>
+            <span>→</span>
+            <div class="dfa-state" data-state="q1">
+                <strong>q1</strong>
+                <small>Search</small>
+            </div>
+            <span>→</span>
+            <div class="dfa-state" data-state="q2">
+                <strong>q2</strong>
+                <small>Train</small>
+            </div>
+            <span>→</span>
+            <div class="dfa-state" data-state="q3">
+                <strong>q3</strong>
+                <small>Details</small>
+            </div>
+            <span>→</span>
+            <div class="dfa-state" data-state="q4">
+                <strong>q4</strong>
+                <small>Payment</small>
+            </div>
+            <span>→</span>
+            <div class="dfa-state final-state" data-state="q5">
+                <strong>q5</strong>
+                <small>Confirmed</small>
+            </div>
+        </div>
+
+        <div class="dfa-info">
+            <h3>Current State: <span id="currentState">q0</span></h3>
+            <p id="stateDescription">
+                Initial State - Waiting for journey details.
+            </p>
+            <p id="transitionLabel">
+                Transition: Not started
+            </p>
+            <p id="acceptance">
+                Status: Waiting
+            </p>
+        </div>
+
+        <button class="reset-btn" id="resetBtn">
+            Reset DFA / New Booking
+        </button>
+    </section>
+
+</main>
+
+<footer>
+    <p>RailGo | Railway Ticket Booking System</p>
+    <p>Designed using Deterministic Finite Automata</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
